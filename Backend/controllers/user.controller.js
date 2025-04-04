@@ -1,4 +1,4 @@
-import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 
 export const register = async (req, res) => {
     try
@@ -21,7 +21,7 @@ export const register = async (req, res) => {
             fullname,
         })
 
-        return res.status(201).json({ message: "User registered successfully" });
+        return res.status(201).json({ message: "User registered successfully" },{newUser});
     }
     catch (error)
     {

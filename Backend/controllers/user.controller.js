@@ -22,7 +22,7 @@ export const register = async (req, res) => {
         const hashedPassword = await userModel.hashPassword(password);
 
         // Create new user
-        const newUser = userService
+        const newUser = await userService
             .createUser({
                 email,
                 password: hashedPassword,

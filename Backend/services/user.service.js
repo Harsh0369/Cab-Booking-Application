@@ -1,18 +1,19 @@
 import userModel from '../models/user.model.js';
 
 
-export const createUser = async (userData) => {
+export const createUser = async ({email,password,fullname}) => {
     try {
-         const hashedPassword = await userModel.hashPassword(password);
+         
 
          // Create new user
          const newUser = await userModel.create({
            email,
-           password: hashedPassword,
+           password,
            fullname,
          });
         return newUser;
     } catch (error) {
+        console.log(error);
         throw new Error('Error creating user: ' + error.message);
     }
 }

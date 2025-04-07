@@ -53,6 +53,14 @@ const captainSchema = new mongoose.Schema(
         min: [1, "Capacity must be at least 1"],
       },
     },
+    location: {
+      lat: {
+        type: Number,
+      },
+      lng: {
+        type: Number,
+      },
+    },
   },
   { timestamps: true }
 );

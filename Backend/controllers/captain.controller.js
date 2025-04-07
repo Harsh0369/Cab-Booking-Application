@@ -1,4 +1,4 @@
-import captainModel from "../models/captain.model";
+import captainModel from "../models/captain.model.js";
 import * as captainService from "../services/captain.service.js";
 
 export const createCaptain = async (req, res) => {

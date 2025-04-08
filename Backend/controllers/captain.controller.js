@@ -1,6 +1,8 @@
 import captainModel from "../models/captain.model.js";
 import * as captainService from "../services/captain.service.js";
 
+import { validationResult } from "express-validator";
+
 export const createCaptain = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -17,7 +19,8 @@ export const createCaptain = async (req, res) => {
     const hashedPassword = await captainModel.hashPassword(password);
 
     const captain = await captainService.createCaptain({
-      fullname,
+      firstname: fullname.firstname,
+      lastname:fullname.lastname,
       email,
       password: hashedPassword,
       color: vehicle.color,

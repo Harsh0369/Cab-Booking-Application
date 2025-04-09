@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import * as captainController from "../controllers/captain.controller.js";
+import * as authMiddleware from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -25,5 +26,7 @@ router.post("/login", [
     body("email").notEmpty().withMessage("Email is required"),
     body("password").notEmpty().withMessage("Password is required"),
 ], captainController.loginCaptain);
+
+router.get("/profile",authMiddleware.authCaptain,captainController.getProfile);
 
 export default router;

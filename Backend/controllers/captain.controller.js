@@ -1,5 +1,6 @@
 import captainModel from "../models/captain.model.js";
 import * as captainService from "../services/captain.service.js";
+import BlacklistTokenModel from "../models/blacklistToken.model.js";
 
 import { validationResult } from "express-validator";
 
@@ -63,6 +64,35 @@ export const loginCaptain = async (req, res) => {
     const token = captain.generateToken();
     return res.status(200).json({ message: "Login successful", token });
   } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+
+export const getProfile = async (req, res) => {
+  try {
+    const captain = await captainModel.findById(req.captain._id).select("-password");
+    if (!captain) {
+      return res.status(404).json({ message: "Captain not found" });
+    }
+    return res.status(200).json({ captain });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export const logout = async (req, res) => {
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    await BlacklistTokenModel.create({ token });
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logout successful" });
+  }
+  catch (error) {
     return res.status(500).json({ message: error.message });
   }
 }

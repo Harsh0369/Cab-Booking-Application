@@ -66,17 +66,17 @@ const UserSignup = () => {
          </form>
          <p className="w-full text-center">
            Already have an account?{" "}
-           <a href="/captainsignup" className="text-blue-500">
+           <a href="/login" className="text-blue-500">
              Login here
            </a>
          </p>
        </div>
        <div>
          <Link
-           to={"/login"}
+           to={"/captainsignup"}
            className="w-full bg-[#10b461] flex flex-col items-center text-white font-semibold py-3 rounded-lg mt-2"
          >
-           Login as Captain
+           Signup as Captain
          </Link>
        </div>
      </div>
